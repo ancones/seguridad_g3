@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:17.6-trixie
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: tomas
+      POSTGRES_DB: postgres
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - appnet
+
+  api:
+    build: .
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DB_USER: postgres
+      DB_PASSWORD: tomas
+      DB_HOST: db     # 👈 este nombre es el del servicio (no uses 192.168...)
+      DB_PORT: 5432
+      DB_NAME: postgres
+    volumes:
+      - .:/app
+    networks:
+      - appnet
+
+volumes:
+  pg_data:
+
+networks:
+  appnet:

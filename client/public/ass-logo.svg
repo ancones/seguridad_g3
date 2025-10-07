@@ -1,0 +1,21 @@
+<svg
+    version="1.0"
+    id="Layer_1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    viewBox="0 0 200 200"
+    enable-background="new 0 0 200 200"
+    xml:space="preserve">
+    
+    <text 
+        x="50%" 
+        y="50%" 
+        dominant-baseline="middle" 
+        text-anchor="middle" 
+        font-family="Arial, sans-serif" 
+        font-size="105" 
+        fill="black"
+        font-weight="bold">
+        ASS
+    </text>
+</svg>

@@ -1,0 +1,324 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  list-style: none;
+  box-sizing: border-box;
+  font-family: 'Nunito', sans-serif;
+  font-size: 22px;
+  font-weight: 100;
+  font-style: normal;
+  position: relative;
+}
+
+html {
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    color: #fff;
+}
+
+body {
+    min-height: 100vh;
+    background-color: dodgerblue;
+}
+
+/* Side */
+
+
+.sidebar-menu {
+  overflow: auto;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.content-main {
+  margin-left: 200px;
+  transition: 0.2s;
+  background-color: rgb(57, 53, 53);
+  height: 100vh;
+}
+
+.content-main.content-collapsed {
+  margin-left: 80px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  padding: 10px;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  background-color: rgba(28, 17, 41, 0.88);
+}
+
+.menu-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-size: 1rem;
+  position: relative;
+}
+
+.toggle-theme-btn {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.toggle {
+  margin-left: 15px;
+}
+
+/* <--- Side */
+
+/* Dave Gray Style   */
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; 
+  padding: 1rem 0.5rem;
+}
+
+/* Dave gray Style */
+
+.auth {
+  background-color: #001529;
+}
+
+.App section {
+    width: 100%;
+    max-width: 420px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.802);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-grow: 1;
+    padding-bottom: 1rem;
+}
+
+.App a, .App a:visited {
+    color: #fff;
+}
+
+[type="text"],
+.App input[type="password"],
+button,
+.App textarea {
+  font-family: 'Nunito', sans-serif;
+  font-size: 22px;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid #333;
+}
+
+form button {
+  margin-top: 1rem;
+}
+
+label {
+  margin-top: 1rem;
+  font-weight: 700;
+}
+
+button {
+  padding: 0.5rem;
+  border: 1px solid #333;
+}
+
+.App li {
+    list-style-type: none;
+}
+
+.instructions {
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+    background: #000;
+    color: #fff;
+    padding: 0.25rem;
+    position: relative;
+    bottom: -10px;
+}
+
+.instructions > svg {
+    margin-right: 0.25rem;
+}
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+.hide {
+    display: none;
+}
+
+.valid {
+    color: limegreen;
+    margin-left: 0.25rem;
+}
+
+.invalid {
+    color: red;
+    margin-left: 0.25rem;
+}
+
+.errmsg {
+    background-color: lightpink;
+    color: firebrick;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.line {
+    display: inline-block;
+}
+
+.flexGrow {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.table-container {
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.styled-table {
+  width: 100%;
+  height: 100%; /* Altura fija del 60% del contenedor */
+  border-collapse: collapse;
+  overflow-y: auto;
+  display: block;
+}
+
+.styled-table thead {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.styled-table th, .styled-table td {
+  border: 1px solid #ddd; /* Borde elegante */
+  text-align: center; /* Centrar los datos */
+  padding: 10px;
+}
+
+.styled-table tbody {
+  display: block;
+  overflow-y: auto;
+  max-height: calc(60vh - 40px); /* Altura con scroll si es necesario */
+}
+
+.styled-table thead {
+  display: table;
+  width: 100%;
+  table-layout: fixed; /* Asegura que el ancho de las columnas sea consistente */
+}
+
+.styled-table tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.styled-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.styled-table tbody tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.styled-table th {
+  border-bottom: 2px solid #ddd;
+}
+
+/* || BASIC DASHBOARD STYLE */
+
+.toggle-container {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.toggle-btn {
+  padding: 10px 20px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.toggle-btn.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.solicitudes-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.solicitudes-table th,
+.solicitudes-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ccc;
+}
+
+.solicitudes-table th {
+  background-color: #f0f0f0;
+}
+
+.quejas-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.quejas-table th,
+.quejas-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ccc;
+}
+
+.quejas-table th {
+  background-color: #f0f0f0;
+}
