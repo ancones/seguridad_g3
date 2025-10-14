@@ -58,5 +58,8 @@ app.use(errorHandler);
 
 mongoose.connection.once('open', () => {
     console.log('Connected to MongoDB');
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-})
+    server = app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+});
+
+// Export app and server (server will be undefined until DB connects)
+module.exports = { app, getServer: () => server };
