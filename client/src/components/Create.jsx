@@ -1,8 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import useRefreshToken from "../hooks/useRefreshToken";
 import useAuth from "../hooks/useAuth";
 import styles from "./Create.module.css";
+
+function mostrarMensaje(tipo) {
+  // tipo puede ser 'success' o 'error'
+  const mensaje = document.querySelector(`.message.${tipo}`);
+  
+  if (mensaje) {
+    // Activar el mensaje (puedes añadir tu lógica de mostrar)
+    // mensaje.classList.add('active');
+
+    // Hacer scroll suave hasta el elemento
+    mensaje.scrollIntoView({
+      behavior: 'smooth',
+      block: 'top' // lo centra en la pantalla
+    });
+  }
+}
 
 
 const SQ_BASE_URL = import.meta.env.VITE_SQ_API_BASE_URL;
@@ -26,7 +42,10 @@ const Create = () => {
   // Queja state
   const [idQueja, setIdQueja] = useState("");
   const [descripcionQueja, setDescripcionQueja] = useState("");
-  const [medidaTomada, setMedidaTomada] = useState("");
+  const [medidaTomada, setMedidaTomada] = useState("Contenido");
+  const [file, setFile] = useState(null);  
+
+  const messageRef = useRef(null);
 
   useEffect(() => {
     const verifyToken = async () => {
@@ -66,13 +85,12 @@ const Create = () => {
       fetchData();
     }
   }, [activeForm, auth?.accessToken]);
-  
-  useEffect(() => {
-    console.log(areas)
-    console.log("SQ_BASE_URL")
-    console.log(SQ_BASE_URL)
-  }, [areas]);
 
+  useEffect(() => {
+    if (mensaje && messageRef.current) {
+      messageRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [mensaje]);
   
 
   const handleSubmitSolicitud = async (e) => {
@@ -127,6 +145,45 @@ const Create = () => {
     }
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!medidaTomada || !descripcionQueja || !file) {
+      alert("Todos los campos son obligatorios.");
+      return;
+    }
+    // Validar tamaño del archivo (100 KB = 102400 bytes)
+    const MAX_SIZE = 100 * 1024; // 100 KB
+    if (file.size > MAX_SIZE) {
+      alert(`El archivo es demasiado grande. Tamaño máximo: 100 KB. Tamaño actual: ${(file.size / 1024).toFixed(2)} KB`);
+      return;
+    }
+
+    // Crear el FormData
+    const formData = new FormData();
+    formData.append("nombre", descripcionQueja);
+    formData.append("edad", medidaTomada);
+    formData.append("file", file);
+
+    try {
+      const response = await axios.post(`${SQ_BASE_URL}/upload/`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      console.log("Respuesta del servidor:", response.data);
+      alert("¡Datos enviados correctamente!");
+    } catch (error) {
+      if (error.response?.status === 413) {
+        alert("Error: El archivo es demasiado grande (máximo 100 KB)");
+      } else {
+        console.error("Error al enviar los datos:", error);
+        alert("Error al enviar los datos");
+      }
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -153,7 +210,7 @@ const Create = () => {
       </div>
 
       {mensaje && (
-        <div className={`${styles.message} ${mensaje.includes("Error") ? styles.error : styles.success}`}>
+        <div ref={messageRef} className={`${styles.message} ${mensaje.includes("Error") ? styles.error : styles.success}`}>
           <span className={styles.messageIcon}>
             {mensaje.includes("Error") ? "❌" : "✅"}
           </span>
@@ -172,18 +229,6 @@ const Create = () => {
         <form onSubmit={handleSubmitSolicitud} className={styles.form}>
           <div className={styles.formCard}>
             <h3 className={styles.formTitle}>Nueva Solicitud</h3>
-            
-            {/* <div className={styles.formGroup}>
-              <label className={styles.label}>ID Solicitud:</label>
-              <input
-                type="number"
-                value={idSolicitud}
-                onChange={(e) => setIdSolicitud(e.target.value)}
-                className={styles.input}
-                placeholder="Ingrese el ID de la solicitud"
-                required
-              />
-            </div> */}
 
             <div className={styles.formGroup}>
               <label className={styles.label}>Descripción:</label>
@@ -233,6 +278,23 @@ const Create = () => {
               </div>
             </div>
 
+            <div className={styles.formGroup}>
+              <label className={styles.label}>Archivos Opcionales:</label>
+
+              <div className={styles.fileInputWrapper}>
+                <input
+                  type="file"
+                  id="archivo"
+                  className={styles.fileInput}
+                  onChange={(e) => setFile(e.target.files[0])}
+                />
+                <label htmlFor="archivo" className={styles.fileLabel}>
+                  📎 Seleccionar archivo
+                </label>
+                {file && <span className={styles.fileName}>{file.name}</span>}
+              </div>
+            </div>
+
             <button type="submit" className={styles.submitButton}>
               <span className={styles.buttonIcon}>📨</span>
               Enviar Solicitud
@@ -245,18 +307,6 @@ const Create = () => {
         <form onSubmit={handleSubmitQueja} className={styles.form}>
           <div className={styles.formCard}>
             <h3 className={styles.formTitle}>Nueva Queja</h3>
-            
-            {/* <div className={styles.formGroup}>
-              <label className={styles.label}>ID Queja:</label>
-              <input
-                type="number"
-                value={idQueja}
-                onChange={(e) => setIdQueja(e.target.value)}
-                className={styles.input}
-                placeholder="Ingrese el ID de la queja"
-                required
-              />
-            </div> */}
 
             <div className={styles.formGroup}>
               <label className={styles.label}>Descripción:</label>
@@ -269,7 +319,6 @@ const Create = () => {
                 required
               />
             </div>
-
 
             <button type="submit" className={styles.submitButton}>
               <span className={styles.buttonIcon}>📤</span>

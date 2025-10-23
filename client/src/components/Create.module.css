@@ -5,8 +5,11 @@
   margin: 0 auto;
   padding: 2rem;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  min-height: 100vh;
+  /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+  background-color: transparent;
+  min-height: 50vh;
+  border: 1px solid rgba(181, 181, 181, 0.774);
+  border-radius: 30px;
 }
 
 .header {
@@ -15,11 +18,11 @@
 }
 
 .title {
-  color: white;
-  font-size: 2.5rem;
+  color: #252525;
+  font-size: 2rem;
   margin-bottom: 2rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  font-weight: 700;
+  /* text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); */
+  font-weight: 600;
 }
 
 .buttonGroup {
@@ -37,13 +40,13 @@
   border: none;
   border-radius: 50px;
   background: rgba(255, 255, 255, 0.1);
-  color: white;
+  color: #252525;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(32, 30, 30, 0.2);
 }
 
 .tabButton:hover {
@@ -53,8 +56,8 @@
 }
 
 .tabButton.active {
-  background: rgba(255, 255, 255, 0.9);
-  color: #667eea;
+  background: rgba(15, 15, 15, 0.9);
+  color: whitesmoke;
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
@@ -75,14 +78,14 @@
 }
 
 .message.success {
-  background: rgba(16, 185, 129, 0.1);
+  background: rgba(17, 17, 17, 0.8);
   color: #10b981;
   border: 2px solid rgba(16, 185, 129, 0.3);
   backdrop-filter: blur(10px);
 }
 
 .message.error {
-  background: rgba(239, 68, 68, 0.1);
+  background: rgba(30, 27, 27, 0.8);
   color: #ef4444;
   border: 2px solid rgba(239, 68, 68, 0.3);
   backdrop-filter: blur(10px);
@@ -136,8 +139,8 @@
   background: rgba(255, 255, 255, 0.95);
   padding: 2.5rem;
   border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
+  /* box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px); */
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -231,8 +234,9 @@
   gap: 0.5rem;
   width: 100%;
   padding: 1rem 2rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #1e2c69 0%, rgb(0, 21, 41) 100%);
+  /* background-color: rgb(0, 21, 41); */
+  color: rgb(227, 226, 226);
   border: none;
   border-radius: 50px;
   font-size: 1.1rem;
@@ -288,4 +292,45 @@
 
 .textarea::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+/* || FILE INPUT */
+
+.fileInputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Oculta el input nativo */
+.fileInput {
+  display: none;
+}
+
+/* Botón personalizado */
+.fileLabel {
+  background-color: #171717;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  font-size: 0.9rem;
+}
+
+.fileLabel:hover {
+  background-color: #252525;
+}
+
+.fileLabel:active {
+  transform: scale(0.97);
+}
+
+/* Nombre del archivo seleccionado */
+.fileName {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  word-break: break-all;
+  max-width: 200px;
 }
